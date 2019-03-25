@@ -4,12 +4,14 @@ window.onload = () => {
     let countries = document.querySelector('.countries');
     let checkData = data => {
         let HTMLString = '<p class="countries-heading">Choose a country</p>';
+        //Check if data object is empty
         if(!data) return;
 
         addDensity(data);
         if(data.length === 1) {
             showData(data);
         } else {
+            //Create dynamic html when the result of search is more than one
             for(let country of data) {
                 HTMLString += 
                 `<section class="country-entry" data-name="${country.name}">
@@ -22,8 +24,10 @@ window.onload = () => {
 
             countries.innerHTML = HTMLString;
             let countryEntries = document.querySelectorAll('.country-entry');
+            //Add onclick event to each result;
             for(let country of countryEntries) {
                 country.onclick = function() {
+                    //Getting the clicked data and use it as argument to showData function;
                     let selectedData = data.find(elem => elem.name === this.dataset.name);
                     showData(selectedData);
                 }
@@ -32,33 +36,34 @@ window.onload = () => {
     }
 
     let checkDensity = data => {
+        //too little people lives here
         if(data.density <= 2) {
             
         }
-        
+        //
         if(data.density > 2 && data.density <= 10) {
 
         }
-
+        //
         if(data.density > 10 && data.density <= 40) {
             
         }
-
+        //
         if(data.density > 40 && data.density <= 100) {
             
         }
-
+        //
         if(data.density > 100 && data.density <= 500) {
             
         }
-
+        //too much people lives here
         if(data.density > 500) {
 
         }
     }
 
     let addDensity = data => {
-    //Added data density property by dividing population by area of results country;
+    //Added density data property by dividing population by area of country;
         for(let d of data) {
             d.density = (d.population / d.area).toFixed(2);
         }
@@ -67,6 +72,7 @@ window.onload = () => {
 
     let showData = data => {
         countries.classList.add('hide');
+        //Create dynamic html with data from api
         selectedCountry.innerHTML = `
         <section class="card name">
             <h3 class="card-label">Country Name</h3>
@@ -105,7 +111,7 @@ window.onload = () => {
 
         fetch(`https://restcountries.eu/rest/v2/name/${country}`)
             .then(request => {
-                if (!request.ok) throw Error("WTF are you doing?");
+                if (!request.ok) throw Error("What are you doing?");
                 return request.json();
             })
             .then(data => {               
