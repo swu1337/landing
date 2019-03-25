@@ -7,8 +7,13 @@ body {
     font-family: 'Source Sans Pro', sans-serif;
 }
 
+main {
+    width: 92%;
+    margin: 0 auto;
+}
+
 .countries {
-    width: 95%;
+    width: 100%;
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
@@ -19,20 +24,66 @@ body {
     width: 100%;
 }
 
-.country {
-    width: 45%;
+.country-entry {
+    width: 31%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-bottom: 15px;
+    background-color: #f3f3f3;
+    border-radius: 3px;
 }
 
 .country-flag {
-    width: 80%; 
+    width: 50%;
+    margin-bottom: 5px;
 }
 
 .country-flag > img {
     width: 100%;
-    height: 90px;
+    height: 41px;
     object-fit: cover;
 }
+
+.country-name {
+    text-align: center;
+    padding: 5px 8px 10px 8px;
+}
+
+.selected-country {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.card {
+    width: 46%;
+    margin-bottom: 25px;
+    background-color: #f7f7f7;
+    border-radius: 3px;
+}
+
+.card-value {
+    padding: 2px 0px 15px 15px;
+    font-size: 22px;
+}
+
+ .card-label {
+    padding: 10px 0px 5px 15px;
+    font-size: 14px;
+    color: #666;
+}
+
+.population, .density {
+    width: 100%;
+}
+
+
+.hide {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+}
+
