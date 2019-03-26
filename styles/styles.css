@@ -13,12 +13,9 @@ body {
 }
 
 main {
-    /* display: flex; */
     width: 92%;
     height: 100vh;
     margin: 0 auto;
-    /* justify-content: center;
-    align-items: center; */
     position: relative;
 }
 
@@ -38,6 +35,7 @@ main {
     font-size: 32px;
     margin-bottom: 2px;
 }
+
 .search > p {
     letter-spacing: 3px;
     font-size: 18px;
@@ -83,7 +81,7 @@ main {
 
 .country-flag {
     width: 50%;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .country-flag > img {
@@ -94,7 +92,7 @@ main {
 
 .country-name {
     text-align: center;
-    padding: 5px 8px 10px 8px;
+    padding: 9px 8px 10px 8px;
 }
 
 .selected-country {
@@ -106,20 +104,21 @@ main {
 
 .card-title {
     padding: 22px 0px;
-    font-size: 28px;
+    font-size: 30px;
+    text-align: center;
 }
 
 .card {
     width: 46%;
     margin-bottom: 25px;
-    background-color: #f7f7f7;
+    background-color: #f6f6f6;
     border-radius: 3px;
 }
 
 .card-label {
-    padding: 10px 0px 8px 20px;
+    padding: 14px 0px 8px 20px;
     font-size: 16px;
-    color: #666;
+    color: #005288;
 }
 
 .card-value {
@@ -140,6 +139,18 @@ main {
 
 .population, .density, .advice {
     width: 100%;
+}
+
+.advice {
+    background-color: #ebebeb;
+}
+
+.advice > p {
+    font-size: 18px;
+}
+
+.advice > h3 {
+    font-size: 20px;
 }
 
 .logo {
@@ -172,10 +183,22 @@ main {
 
 .hide {
     display: none;
-    visibility: hidden;
-    opacity: 0;
+    z-index: -1;
 }
 
 .no-bg {
     background: white;
+}
+
+.search-again {
+    width: 100%;
+    font-size: 22px;
+    letter-spacing: 1px; 
+    padding: 20px 0px;
+    background-color: #231F20;
+    border: none; 
+    cursor: pointer;
+    color: white;
+    text-align: center;
+    margin: 25px 0;
 }

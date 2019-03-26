@@ -5,8 +5,12 @@ window.onload = () => {
     let countries = document.querySelector('.countries');
     let search = document.querySelector('.search');
     let body = document.querySelector('body');
-    let searchAgain = document.getElementsByClassName('search-again')[0];
-    console.log(searchAgain);
+    let searchAgain = document.querySelectorAll('.search-again');
+
+    let removeError = parent => { if(document.querySelector('.error')) parent.removeChild(document.querySelector('.error')); };
+    
+    //focus on the input when page is loaded
+    input.focus();
 
     let getAdvice = data => {
         let advice = '';
@@ -32,10 +36,11 @@ window.onload = () => {
         }
         return advice;
     };
+
     let addDensity = data => {
         //Added density data property by dividing population by area of country;
         for(let d of data) {
-            //check if area is not empty to prevent infinity;
+            //Check if area is not empty to prevent infinity;
             if(d.area) {
                 d.density = (d.population / d.area).toFixed(2);
             } else {
@@ -44,58 +49,15 @@ window.onload = () => {
         }
         return data;
     };
-    let checkData = (data, query) => {
-        let dataString = '';
-        countries.innerHTML = '';
-        countries.insertAdjacentHTML('afterbegin',
-            `<p class="countries-heading">Choose a country</p>
-            <p class="countries-query">Results for '${query}'</p>`
-        );
-        //Check if data object is empty;
-        if(!data) return;
 
-        search.classList.add('hide');
-        body.classList.add('no-bg');
-        addDensity(data);
-        if(data.length === 1) {
-            showData(data[0]);
-        } else {
-            //Create dynamic html when the result of search is more than one
-            for(let country of data) {
-                dataString += 
-                `<section class="country-entry" data-name="${country.name}">
-                    <p class="country-name">${country.name}</p>
-                    <figure class="country-flag">
-                        <img src="${country.flag}" alt="flag of ${country.name}" />
-                    </figure>
-                </section>`;
-            }
-            countries.classList.remove('hide');
-            //countries.innerHTML += dataString;
-            let countryEntries = document.querySelectorAll('.country-entry');
-            //Add onclick event to each result;
-            for(let country of countryEntries) {
-                country.onclick = function() {
-                    //Getting the clicked data and use it as argument to showData function;
-                    let selectedData = data.find(elem => elem.name === this.dataset.name);
-                    showData(selectedData);
-                }
-            }
-        }
-        searchAgain.onclick = function() {
-            console.log('eww');
-            //Go back starting page;
-            selectedCountry.classList.add('hide');
-            countries.classList.add('hide');
-            search.classList.remove('hide');
-        };
-    };
     let showData = data => {
+        //Show button search again;
+        searchAgain[1].classList.remove('hide');
         //Show yourself;
-        selectedCountry.classList.remove('hide');
-        //Hide selection of results
+        countries.classList.remove('hide');
+        //Hide selection of results;
         countries.classList.add('hide');
-        //Create dynamic html with data from api
+        //Create dynamic html with data from api;
         selectedCountry.insertAdjacentHTML('afterbegin',
             `<h2 class="card-title">Landing information</h2>
             <section class="card name">
@@ -135,18 +97,71 @@ window.onload = () => {
         let inputCountry = input.value;
 
         if(!inputCountry) return;
-
+        //Make request;
         fetch(`https://restcountries.eu/rest/v2/name/${inputCountry}`)
             .then(request => {
                 if (!request.ok) throw Error("What are you doing?");
                 return request.json();
             })
-            .then(data => {      
-                checkData(data, inputCountry);
+            .then(data => {
+                //Retrieve data;
+                let dataString = `<p class="countries-heading">Choose a country</p>
+                <p class="countries-query">Results for '${inputCountry}'</p>`;
+                //Check if error message is there, if so remove it;
+                removeError(countries);
+                //Check if data object is empty;
+                if(!data) return;
+                //Add onclick to both search again button;
+                for(btn of searchAgain) {
+                    btn.onclick = () => {
+                        //Go back starting page;
+                        location.reload();
+                    }
+                }
+                //Hide the landing page;
+                search.classList.add('hide');
+                //Remove destracting bg when showing data;
+                body.classList.add('no-bg');
+                addDensity(data);
+                
+                if(data.length === 1) {
+                    //Show the details of result country since is only 1;
+                    showData(data[0]);
+                } else {
+                    //Create dynamic html when the result of search is more than one;
+                    for(let country of data) {
+                        dataString += 
+                        `<section class="country-entry" data-name="${country.name}">
+                            <p class="country-name">${country.name}</p>
+                            <figure class="country-flag">
+                                <img src="${country.flag}" alt="flag of ${country.name}" />
+                            </figure>
+                        </section>`;
+                    }
+
+                    //Show search again button;
+                    searchAgain[0].classList.remove('hide');
+                    //Show search results;
+                    countries.classList.remove('hide');
+                    countries.insertAdjacentHTML('afterbegin', dataString);
+                    //Add onclick event to each result;
+                    let countryEntries = document.querySelectorAll('.country-entry');
+                    for(let country of countryEntries) {
+                        country.onclick = function() {
+                            //Getting the clicked data and use it as argument to showData function;
+                            let selectedData = data.find(elem => elem.name === this.dataset.name);
+                            showData(selectedData);
+                        }
+                    }
+                }
             })
             .catch(error => {
                 console.log(error);
-                countries.innerHTML = `No countries found!`;
+                removeError(countries);
+                countries.insertAdjacentHTML('afterbegin', `<p class="error">The country '${inputCountry}' not found!</p>`);
+                input.value = '';
             });
     };
 };
+//Using insertAdjacentHTML instead to insert htmlstring of innerHTML;
+//https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML
