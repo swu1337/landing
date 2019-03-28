@@ -1,5 +1,108 @@
 @media only screen and (min-width: 768px) {
+    .search > h1 {
+        font-size: 50px;
+        margin-bottom: 4px;
+    }    
 
+    .search > p {
+        font-size: 31px;
+    }
+
+    .input { 
+        padding: 15px 20px;
+        width: 265px;
+        font-size: 22px;
+    }
+
+    .btn {
+        font-size: 22px;
+        padding: 10px 36px;
+    }
+
+    .card, .density {
+        width: 47%;
+    }
+
+    .countries-heading {
+        font-size: 54px;
+        padding-top: 40px;
+    }
+
+    .countries-query {
+        font-size: 30px;
+        padding: 10px 0px 30px 0px;
+    }
+
+    .country-name {
+        font-size: 26px;
+        padding: 13px 8px;
+    }
+
+    .country-flag > img  {
+        height: 70px;
+        margin-bottom: 13px;
+    }
+
+    .search-again {
+        font-size: 28px;
+        padding: 30px 0px;
+    }
+
+    .country-entry {
+        margin-bottom: 19px;
+    }
+
+    .card-title {
+        padding: 50px 0px 30px;
+        font-size: 44px;
+    }
+
+    .card-label {
+        font-size: 26px;
+    }
+
+    .card-value {
+        font-size: 32px;
+    }
+
+    .card-figure {
+        width: 40%;
+        margin: 5px 22px 30px;
+    }
+
+    .advice {
+        flex: 1;
+    }
+
+    .advice > h3 {
+        font-size: 36px;
+        padding: 20px 35px;
+    }
+
+    .advice > p {
+        font-size: 30px;
+        padding: 0px 35px 35px 35px;
+    }
+
+    .news {
+        flex-flow: row wrap;
+        justify-content: space-between;
+    }
+
+    .news-header {
+        width: 100%;
+        font-size: 75px;
+        line-height: 71px;
+    }
+
+    .news-subheader {
+        width: 100%;
+        font-size: 24px;
+    }
+
+    .news-content {
+        width: 49%;
+    }
 }
 
 @media only screen and (min-width: 1366px) {

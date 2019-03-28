@@ -57,7 +57,7 @@ main {
     text-align: center;
     font-weight: bold;
     font-size: 28px;
-    padding: 20px 0px 0px 0px;
+    padding-top: 20px;
 }
 
 .countries-query {
@@ -166,6 +166,11 @@ main {
 .input {
     padding: 8px;
     font-size: 16px;
+}
+
+.news {
+    display: flex;
+    flex-direction: column;
 }
 
 .news-header {

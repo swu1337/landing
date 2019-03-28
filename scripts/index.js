@@ -108,7 +108,7 @@ window.onload = () => {
                     //Create html for each article; //Removed the time from the published date;
                     news.insertAdjacentHTML('beforeend',
                         `<section class="news-content">
-                            <a class="news-link" href="${article.url}">
+                            <a class="news-link" target="_blank" href="${article.url}">
                                 <article class="news-article">
                                     <p class="news-article-title">${article.title}</p>
                                     <p class="news-article-byline">
