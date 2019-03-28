@@ -1,4 +1,6 @@
 window.onload = () => {
+    //Using insertAdjacentHTML instead of innerHTML to insert HTMLstrings;
+    //https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML
     let input = document.querySelector('.input');
     let request = document.querySelector('.request');
     let selectedCountry = document.querySelector('.selected-country');
@@ -6,10 +8,11 @@ window.onload = () => {
     let search = document.querySelector('.search');
     let body = document.querySelector('body');
     let searchAgain = document.querySelectorAll('.search-again');
+    let news = document.querySelector('.news');
 
-    let removeError = parent => { if(document.querySelector('.error')) parent.removeChild(document.querySelector('.error')); };
+    let removeError = parent => {if(document.querySelector('.error')) parent.removeChild(document.querySelector('.error'));};
     
-    //focus on the input when page is loaded
+    //Focus on the input when page is loaded;
     input.focus();
 
     let getAdvice = data => {
@@ -91,7 +94,36 @@ window.onload = () => {
                 <p class="card-value">${getAdvice(data)}</p>
             </section>`
         );
+        showNews();
     };
+
+    let showNews = () => {
+        fetch('https://api.nytimes.com/svc/mostpopular/v2/viewed/7.json?api-key=dAyy8S4zy2wexeaA81hhvP2eFqw5zO06')
+            .then(response => response.json())
+            .then(data => {
+                //Show news section;
+                news.classList.remove('hide');
+                //Work around to get the index of item in an array; slice to get the last 6 items of an array;
+                for(const [i, article] of data.results.slice(data.results.length - 7).entries()) {
+                    //Create html for each article; //Removed the time from the published date;
+                    news.insertAdjacentHTML('beforeend',
+                        `<section class="news-content">
+                            <a class="news-link" href="${article.url}">
+                                <article class="news-article">
+                                    <p class="news-article-title">${article.title}</p>
+                                    <p class="news-article-byline">
+                                        <span class="news-article-author">${article.byline}</span>
+                                        ${new Date(article.published_date).toUTCString().split(' ').slice(0, 4).join(' ')}
+                                    </p>
+                                </article>
+                            </a>
+                        </section>`
+                    );
+                    //Select dynamic created section to set background, get the last image from media-meta;
+                    document.querySelectorAll('.news-content')[i].style.backgroundImage = `url(${article.media[0]["media-metadata"][article.media[0]["media-metadata"].length - 1].url})`;
+                }
+            })
+    }
 
     request.onclick = function() {
         let inputCountry = input.value;
@@ -112,7 +144,7 @@ window.onload = () => {
                 //Check if data object is empty;
                 if(!data) return;
                 //Add onclick to both search again button;
-                for(btn of searchAgain) {
+                for(let btn of searchAgain) {
                     btn.onclick = () => {
                         //Go back starting page;
                         location.reload();
@@ -129,7 +161,7 @@ window.onload = () => {
                     showData(data[0]);
                 } else {
                     //Create dynamic html when the result of search is more than one;
-                    for(let country of data) {
+                    for(const country of data) {
                         dataString += 
                         `<section class="country-entry" data-name="${country.name}">
                             <p class="country-name">${country.name}</p>
@@ -163,5 +195,3 @@ window.onload = () => {
             });
     };
 };
-//Using insertAdjacentHTML instead to insert htmlstring of innerHTML;
-//https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML
