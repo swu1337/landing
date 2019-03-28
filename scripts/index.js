@@ -103,8 +103,8 @@ window.onload = () => {
             .then(data => {
                 //Show news section;
                 news.classList.remove('hide');
-                //Work around to get the index of item in an array; slice to get the last 6 items of an array;
-                for(const [i, article] of data.results.slice(data.results.length - 7).entries()) {
+                //Work around to get the index of item in an array; slice to get the last 8 items of an array;
+                for(const [i, article] of data.results.slice(data.results.length - 8).entries()) {
                     //Create html for each article; //Removed the time from the published date;
                     news.insertAdjacentHTML('beforeend',
                         `<section class="news-content">
