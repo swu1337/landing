@@ -13,6 +13,8 @@ body {
 }
 
 main {
+    display: flex;
+    flex-flow: column;
     width: 92%;
     height: 100vh;
     margin: 0 auto;
@@ -77,6 +79,7 @@ main {
     margin-bottom: 15px;
     background-color: #f3f3f3;
     border-radius: 3px;
+    cursor: pointer;
 }
 
 .country-flag {
@@ -143,7 +146,7 @@ main {
 }
 
 .advice {
-    background-color: #ebebeb;
+    background-color: #d9e2e8;
 }
 
 .advice > p {
@@ -170,6 +173,7 @@ main {
 
 .news {
     display: flex;
+    width: 100%;
     flex-direction: column;
 }
 
@@ -202,7 +206,7 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    height: 210px;
+    height: 200px;
 }
 
 .news-article-title {
@@ -229,6 +233,10 @@ main {
     text-align: center;
     font-size: 16px;
     cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #005288;
 }
 
 .hide {
