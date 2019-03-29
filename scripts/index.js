@@ -31,7 +31,7 @@ window.onload = () => {
         }
         //Above average of people lives here;
         if(data.density > 100 && data.density <= 250) {
-            advice = `The population density is high. It's very easy to find people around. If you desire to land here, it's a okay place to land.`;
+            advice = `The population density is high. It's very easy to find people around. If you desire to land here, it's an okay place to land.`;
         }
         //Too much people lives here;
         if(data.density > 250) {
@@ -123,18 +123,15 @@ window.onload = () => {
                     document.querySelectorAll('.news-content')[i].style.backgroundImage = `url(${article.media[0]["media-metadata"][article.media[0]["media-metadata"].length - 1].url})`;
                 }
             })
-    }
+    };
 
     request.onclick = function() {
         let inputCountry = input.value;
-
+        //Do nothing if input is empty
         if(!inputCountry) return;
         //Make request;
         fetch(`https://restcountries.eu/rest/v2/name/${inputCountry}`)
-            .then(request => {
-                if (!request.ok) throw Error("What are you doing?");
-                return request.json();
-            })
+            .then(request => request.json())
             .then(data => {
                 //Retrieve data;
                 let dataString = `<p class="countries-heading">Choose a country</p>
@@ -171,10 +168,10 @@ window.onload = () => {
                         </section>`;
                     }
 
-                    //Show search again button;
+                    //Show search again button and results;
                     searchAgain[0].classList.remove('hide');
-                    //Show search results;
                     countries.classList.remove('hide');
+                    //Insert data into HTML;
                     countries.insertAdjacentHTML('afterbegin', dataString);
                     //Add onclick event to each result;
                     let countryEntries = document.querySelectorAll('.country-entry');
@@ -188,9 +185,10 @@ window.onload = () => {
                 }
             })
             .catch(error => {
-                console.log(error);
                 removeError(countries);
+                //Show error message;
                 countries.insertAdjacentHTML('afterbegin', `<p class="error">The country '${inputCountry}' not found!</p>`);
+                //Reset input;
                 input.value = '';
             });
     };

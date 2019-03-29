@@ -82,6 +82,10 @@ main {
     cursor: pointer;
 }
 
+.country-entry:hover {
+    background-color: #e1e4e7;
+}
+
 .country-flag {
     width: 50%;
     margin-bottom: 10px;
@@ -195,6 +199,7 @@ main {
     background-size: cover;
     background-position: center;
     margin-bottom: 15px;
+    overflow: hidden;
 }
 
 .news-link {
@@ -235,7 +240,7 @@ main {
     cursor: pointer;
 }
 
-.btn:hover {
+.btn:hover, .search-again:hover {
     background-color: #005288;
 }
 

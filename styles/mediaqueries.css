@@ -71,7 +71,7 @@
     }
 
     .advice {
-        flex: 1;
+        width: 100%;
     }
 
     .advice > h3 {
@@ -118,7 +118,7 @@
     }
     
     .logo {
-        width: 49%;
+        width: 28%;
     }
 
     .search > h1 {
@@ -152,12 +152,9 @@
         margin-bottom: 24px;
     }
 
-    .country-entry:hover {
-        background-color: #e1e4e7;
-    }
-
     .country-flag > img {
-        height: 95px;
+        height: 100px;
+        object-fit: contain;
     }
 
     .selected-country, .news {
@@ -178,11 +175,11 @@
     }
 
     .news-article {
-        height: 190px;
+        height: 175px;
     }
 
     .news-article-title {
-        font-size: 17px;
+        font-size: 15px;
     }
 
     .news-article-byline {
@@ -206,11 +203,35 @@
     }
 
     .search-again {
-        align-self: flex-end;
+        width: 62%;
+        font-size: 26px;
+        padding: 26px 0px;
     }
 
 }
 
 @media only screen and (min-width: 1920px) {
+    main {
+        max-width: 1366px;
+        width: 80%;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
 
+    .logo {
+        width: 21%;
+    }
+
+    .search > h1 {
+        font-size: 54px;
+    }
+
+    .search > p {
+        font-size: 32px;
+    }
+
+    .search-again {
+        width: 51%;
+    }
 }
