@@ -131,7 +131,10 @@ window.onload = () => {
         if(!inputCountry) return;
         //Make request;
         fetch(`https://restcountries.eu/rest/v2/name/${inputCountry}`)
-            .then(request => request.json())
+            .then(request => {
+                if (!request.ok) throw Error("What are you doing?");	
+                return request.json();	
+            })
             .then(data => {
                 //Retrieve data;
                 let dataString = `<p class="countries-heading">Choose a country</p>
